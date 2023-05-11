@@ -1,4 +1,27 @@
+var delay = 250;
+var throttled = false;
+
 document.addEventListener("DOMContentLoaded", ready);
+window.addEventListener("resize", windowResized);
+
+function windowResized() {
+    if (!throttled) {
+        throttled = true;
+        let url = window.location.href;
+        let targetPageId = url.split("#")[1];
+        let targetPage = document.getElementById(targetPageId);
+        
+        if (targetPage.scrollHeight > targetPage.clientHeight) {
+            targetPage.style.overflowY = "scroll";
+        } else {
+            targetPage.style.overflowY = "hidden";
+        }
+    }
+    setTimeout(function() {
+        throttled = false
+    }, delay);
+
+}
 
 function ready() {
     let url = window.location.href;
@@ -38,6 +61,8 @@ function ready() {
     
     targetPage.scrollIntoView();
 }
+
+
 
 let tab1 = document.getElementById("tab_1");
 tab1.addEventListener("click", selectTab);
