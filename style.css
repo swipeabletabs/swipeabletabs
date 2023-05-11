@@ -30,7 +30,7 @@
 .slides {
   display: flex;
   flex-direction: row;
-  overflow-x: hidden;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
   
   scroll-behavior: smooth;
