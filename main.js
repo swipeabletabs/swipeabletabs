@@ -1,3 +1,44 @@
+document.addEventListener("DOMContentLoaded", ready);
+
+function ready() {
+    let url = window.location.href;
+
+    let targetPageId = url.split("#")[1];
+    console.log(targetPageId);
+
+    let tabNumber = targetPageId.split("_")[1];
+    let targetTabId = "tab_"+tabNumber;
+    let targetTab = document.getElementById(targetTabId);
+
+    let allTabs = targetTab.parentElement.children;
+
+    console.log(allTabs);
+    
+    Array.from(allTabs).forEach(function (currentItem, currentIndex) {
+        console.log(currentItem);
+        currentItem.style.background = "#aaa"
+        currentItem.style.borderBottom = "none";
+    });
+    
+    targetTab.style.background = "#eee";
+    targetTab.style.borderBottom = "solid black 2px";
+    
+    
+    
+    let targetPage = document.getElementById(targetPageId);
+    console.log(targetPage);
+    
+    if (targetPage.scrollHeight > targetPage.clientHeight) {
+        console.log("overflow");
+        targetPage.style.overflowY = "scroll";
+    } else {
+        console.log("no overflow");
+        targetPage.style.overflowY = "hidden";
+    }
+    
+    targetPage.scrollIntoView();
+}
+
 let tab1 = document.getElementById("tab_1");
 tab1.addEventListener("click", selectTab);
 
@@ -30,10 +71,10 @@ function selectTab() {
     
     if (targetPage.scrollHeight > targetPage.clientHeight) {
         console.log("overflow");
-        targetPage.style.overflowX = "scroll";
+        targetPage.style.overflowY = "scroll";
     } else {
         console.log("no overflow");
-        targetPage.style.overflowX = "hidden";
+        targetPage.style.overflowY = "hidden";
     }
     
 }
