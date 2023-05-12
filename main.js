@@ -1,12 +1,62 @@
-var delay = 250;
-var throttled = false;
+var resizeDelay = 250;
+var resizeThrottled = false;
+
+var scrollDelay = 250;
+var scrollThrottled = false;
+
+var timeout = false;
 
 document.addEventListener("DOMContentLoaded", ready);
+
 window.addEventListener("resize", windowResized);
 
+var slidesContainer = document.getElementById("slides_container");
+slidesContainer.addEventListener("scroll", pagesScrolling);
+slidesContainer.addEventListener("scroll", pagesScrolled);
+
+function pagesScrolled() {
+    clearTimeout(timeout)
+    timeout = setTimeout(updateTabs, 100);
+}
+
+function updateTabs() {
+    let pages = slidesContainer.children;
+    let smallestX = Number.POSITIVE_INFINITY;
+    let targetPage;
+    Array.from(pages).forEach(function (currentItem, currentIndex) {
+        if (Math.abs(currentItem.getBoundingClientRect().x) < smallestX) {
+            smallestX = Math.abs(currentItem.getBoundingClientRect().x);
+            targetPage = currentIndex + 1;
+        }
+    });
+        
+    let targetTabId = "tab_"+targetPage;
+    let targetTab = document.getElementById(targetTabId);
+
+    let allTabs = targetTab.parentElement.children;
+        
+    Array.from(allTabs).forEach(function (currentItem, currentIndex) {
+        currentItem.style.background = "#aaa"
+        currentItem.style.borderBottom = "none";
+    });
+        
+    targetTab.style.background = "#eee";
+    targetTab.style.borderBottom = "solid black 2px";
+}
+
+function pagesScrolling() {
+    if (!scrollThrottled) {
+        scrollThrottled = true;
+        updateTabs();
+    }
+    setTimeout(function() {
+        scrollThrottled = false
+    }, scrollDelay);
+}
+
 function windowResized() {
-    if (!throttled) {
-        throttled = true;
+    if (!resizeThrottled) {
+        resizeThrottled = true;
         let url = window.location.href;
         let targetPageId = url.split("#")[1];
         console.log(targetPageId);
@@ -22,8 +72,8 @@ function windowResized() {
         }
     }
     setTimeout(function() {
-        throttled = false
-    }, delay);
+        resizeThrottled = false
+    }, resizeDelay);
 
 }
 
