@@ -1,9 +1,6 @@
 var resizeDelay = 250;
 var resizeThrottled = false;
 
-var scrollDelay = 250;
-var scrollThrottled = false;
-
 var timeout = false;
 
 document.addEventListener("DOMContentLoaded", ready);
@@ -11,12 +8,11 @@ document.addEventListener("DOMContentLoaded", ready);
 window.addEventListener("resize", windowResized);
 
 var slidesContainer = document.getElementById("slides_container");
-slidesContainer.addEventListener("scroll", pagesScrolling);
 slidesContainer.addEventListener("scroll", pagesScrolled);
 
 function pagesScrolled() {
     clearTimeout(timeout)
-    timeout = setTimeout(updateTabs, 100);
+    timeout = setTimeout(updateTabs, 250);
 }
 
 function updateTabs() {
@@ -44,15 +40,6 @@ function updateTabs() {
     targetTab.style.borderBottom = "solid black 2px";
 }
 
-function pagesScrolling() {
-    if (!scrollThrottled) {
-        scrollThrottled = true;
-        updateTabs();
-    }
-    setTimeout(function() {
-        scrollThrottled = false
-    }, scrollDelay);
-}
 
 function windowResized() {
     if (!resizeThrottled) {
