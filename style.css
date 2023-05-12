@@ -9,7 +9,7 @@
   flex-direction: row;
 }
 
-.slider > a {
+.slider > span {
   width: 33.33%;
   height: 1.5rem;
   background: #aaa;
@@ -51,14 +51,14 @@
 
 #tab_1 {
   background: #eee;
-  border-bottom: solid black 2px;
+  border-bottom: solid #F30001 2px;
 }
 
 .slides > div {
   scroll-snap-align: start;
   flex-shrink: 0;
   width: 100%;
-  background: white;
+  background: #030302;
   transform-origin: center center;
   transform: scale(1);
   transition: transform 0.5s;
@@ -70,9 +70,6 @@
 }
 
 
-.footer {
-  background: #aaa;
-}
 
 
 html, body {
@@ -86,4 +83,6 @@ html, body {
 body {
   
   font-family: sans-serif;
+  color: #F5F7F4;
+  background:#030302
 }

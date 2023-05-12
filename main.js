@@ -3,7 +3,7 @@ var resizeThrottled = false;
 
 var timeout = false;
 
-document.addEventListener("DOMContentLoaded", ready);
+//document.addEventListener("DOMContentLoaded", ready);
 
 window.addEventListener("resize", windowResized);
 
@@ -37,7 +37,7 @@ function updateTabs() {
     });
         
     targetTab.style.background = "#eee";
-    targetTab.style.borderBottom = "solid black 2px";
+    targetTab.style.borderBottom = "solid #F30001 2px";
 }
 
 
@@ -85,7 +85,7 @@ function ready() {
         });
         
         targetTab.style.background = "#eee";
-        targetTab.style.borderBottom = "solid black 2px";
+        targetTab.style.borderBottom = "solid #F30001 2px";
         
         
         
@@ -129,8 +129,9 @@ function selectTab() {
     
     targetTab.style.background = "#eee";
     targetTab.style.borderBottom = "solid black 2px";
-    
-    let targetPageId = targetTab.href.split("#")[1];
+
+    console.log(targetTab.id)
+    let targetPageId = "page_"+targetTab.id.split("_")[1];
     console.log(targetPageId);
     
     let targetPage = document.getElementById(targetPageId);
@@ -143,5 +144,7 @@ function selectTab() {
         console.log("no overflow");
         targetPage.style.overflowY = "hidden";
     }
+
+    targetPage.scrollIntoView();
     
 }
