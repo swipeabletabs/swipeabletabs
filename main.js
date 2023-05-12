@@ -12,7 +12,7 @@ slidesContainer.addEventListener("scroll", pagesScrolled);
 
 function pagesScrolled() {
     clearTimeout(timeout)
-    timeout = setTimeout(updateTabs, 250);
+    timeout = setTimeout(updateTabs, 100);
 }
 
 function updateTabs() {
